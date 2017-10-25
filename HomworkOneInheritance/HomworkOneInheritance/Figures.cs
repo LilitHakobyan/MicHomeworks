@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace HomworkOneInheritance
 {
-    class Figures
-    {  public double Width  {get; set;}
-       public double Height { get; set;}
+    public class Figures
+    {
+        public double Width { get; set; }
+        public double Height { get; set; }
 
         public Figures(double height, double width)
         {
@@ -17,11 +18,11 @@ namespace HomworkOneInheritance
         }
     }
 
-    class Rectangular:Figures
+    public class Rectangular : Figures
     {
         public Rectangular(double height, double width) : base(height, width)
         {
-            
+
         }
         public void Drow()
         {
@@ -33,10 +34,10 @@ namespace HomworkOneInheritance
                 }
                 Console.WriteLine();
             }
-            
+
         }
     }
-    class Triangular : Figures
+    public class Triangular : Figures
     {
         public Triangular(double height, double width) : base(height, width)
         {
@@ -44,18 +45,18 @@ namespace HomworkOneInheritance
         }
         public void Drow()
         {
-            for (int i = 0; i < Height; i++)
+            for (int i = 1; i <= Height; i++)
             {
-                for (int j = 0; j <i+1; j++)
+                for (int  j = 1; j <= i; j++)
                 {
                     Console.Write("* ");
                 }
                 Console.WriteLine();
             }
-            
+
         }
     }
-    class Quadrate : Figures
+    public class Quadrate : Figures
     {
         public Quadrate(double size) : base(size, size)
         {

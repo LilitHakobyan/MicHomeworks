@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomworkOneInheritance", "HomworkOneInheritance\HomworkOneInheritance.csproj", "{79A33315-42DB-429E-B9E5-F7CEEF60A10C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee", "Employee\Employee.csproj", "{94E0B5F5-276E-4512-80C3-2C702291EA91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{79A33315-42DB-429E-B9E5-F7CEEF60A10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79A33315-42DB-429E-B9E5-F7CEEF60A10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79A33315-42DB-429E-B9E5-F7CEEF60A10C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
