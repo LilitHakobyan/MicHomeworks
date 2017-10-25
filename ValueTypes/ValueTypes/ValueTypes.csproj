@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{79A33315-42DB-429E-B9E5-F7CEEF60A10C}</ProjectGuid>
+    <ProjectGuid>{A04C2311-1A58-450E-90A7-7B306DABAF9C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HomworkOneInheritance</RootNamespace>
-    <AssemblyName>HomworkOneInheritance</AssemblyName>
+    <RootNamespace>ValueTypes</RootNamespace>
+    <AssemblyName>ValueTypes</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,13 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Figures.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

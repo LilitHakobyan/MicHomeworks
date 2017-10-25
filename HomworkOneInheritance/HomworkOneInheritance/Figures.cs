@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,11 @@ namespace HomworkOneInheritance
             Width = width;
             Height = height;
         }
+
+        public void Draw()
+        {
+            Console.WriteLine("Figures Drow");
+        }
     }
 
     public class Rectangular : Figures
@@ -24,7 +30,7 @@ namespace HomworkOneInheritance
         {
 
         }
-        public void Drow()
+        public new void Draw()
         {
             for (int i = 0; i < Height; i++)
             {
@@ -34,8 +40,11 @@ namespace HomworkOneInheritance
                 }
                 Console.WriteLine();
             }
+            base.Draw();
 
         }
+        
+       
     }
     public class Triangular : Figures
     {
@@ -43,11 +52,11 @@ namespace HomworkOneInheritance
         {
 
         }
-        public void Drow()
+        public new void Draw()
         {
-            for (int i = 1; i <= Height; i++)
+            for (int i = 0; i < Height; i++)
             {
-                for (int  j = 1; j <= i; j++)
+                for (double  j = Width-i-1; j <Width; j++)
                 {
                     Console.Write("* ");
                 }
@@ -62,7 +71,7 @@ namespace HomworkOneInheritance
         {
 
         }
-        public void Drow()
+        public new void Draw()
         {
             for (int i = 0; i < Height; i++)
             {
