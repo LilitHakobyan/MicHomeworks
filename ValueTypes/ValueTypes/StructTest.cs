@@ -19,7 +19,11 @@ namespace ValueTypes
 
         public void F(StructTest st)
         {
+            Console.WriteLine(this.GetHashCode());
+            Console.WriteLine(st.GetHashCode());
             this = st;
+            Console.WriteLine(this.GetHashCode());
+            Console.WriteLine(st.GetHashCode());
         }
 
     }
@@ -46,6 +50,8 @@ namespace ValueTypes
         public void F(ClassTest st)
         {
             //this = st; //error 
+            Console.WriteLine(this.GetHashCode());
+            Console.WriteLine(st.GetHashCode());
             Test.CalcTax(this);
         }
       
