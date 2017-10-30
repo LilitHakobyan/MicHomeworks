@@ -49,7 +49,7 @@ namespace ValueTypes
 
         public void F(ClassTest st)
         {
-            //this = st; //error 
+            //this = st; //error  this@ ays depqum hasce e ev hnaravor che poxel
             Console.WriteLine(this.GetHashCode());
             Console.WriteLine(st.GetHashCode());
             Test.CalcTax(this);
