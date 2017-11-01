@@ -8,17 +8,13 @@ namespace FindRandomNumber
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Game_F(Player compPlayer, Player userPlayer)
         {
-            Player compPlayer=new Player();
-            Player userPlayer=new Player();
-            Console.WriteLine("~~~~~Let start the game~~~~");
-
-            while (compPlayer.Point!=5 && userPlayer.Point!=5)
+            while (compPlayer.Point != 5 && userPlayer.Point != 5)
             {
                 Random rnum = new Random();
                 int numberRandom = rnum.Next(0, 9);
-                
+
                 for (int i = 0; i < 5; i++)
                 {
                     Console.WriteLine("Please write number ");
@@ -41,7 +37,7 @@ namespace FindRandomNumber
                                 Console.WriteLine($"User {userPlayer.Point} : Comp {compPlayer.Point} :");
                             }
                             else
-                            {
+                            {  
                                 Console.WriteLine("Wrong, try again!!!!!!!!!!!!");
                             }
                         }
@@ -52,11 +48,26 @@ namespace FindRandomNumber
                         Console.WriteLine("Upsss   !!!!!!!!!!!!!!!!!!!!!!!!!!");
                         i--;
                     }
-                    
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
 
                 }
 
             }
+
+        }
+
+
+        static void Main(string[] args)
+        {
+            Player compPlayer=new Player();
+            Player userPlayer=new Player();
+            Console.WriteLine("~~~~~Let start the game~~~~");
+            Game_F(compPlayer, userPlayer);
+            
             if (userPlayer.Point==5)
             {
                 Console.WriteLine("Congratulations you win the game");
