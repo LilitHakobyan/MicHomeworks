@@ -10,13 +10,11 @@ namespace FindRandomNumber
     {
         public int Point { get; private set; }
         public int GenNumber { get; private set; } // gen number
-
         public void Generate()
         {
             Random rnum = new Random();
             GenNumber = rnum.Next(0, 9);
         }
-
         public bool Check(int answer)
         {
             if (GenNumber == answer)
@@ -25,11 +23,9 @@ namespace FindRandomNumber
             }
             return false;
         }
-
         public int IncScor()
         {
            return Point++;
         }
-        
     }
 }

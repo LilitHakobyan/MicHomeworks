@@ -35,9 +35,6 @@ namespace FindRandomNumber
                 }
 
             }
-
-
-
         }
 
         static void Main(string[] args)

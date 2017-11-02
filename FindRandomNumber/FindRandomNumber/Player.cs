@@ -13,9 +13,7 @@ namespace FindRandomNumber
         public int IncScor()
         {
             return Point++;
-        }
-
-        
+        }        
         public void GenAnswer()
         {
             try
@@ -34,6 +32,5 @@ namespace FindRandomNumber
                 Console.WriteLine(e.Message);
             }
         }
-
     }
 }
