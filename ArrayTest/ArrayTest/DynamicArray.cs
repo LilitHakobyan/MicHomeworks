@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,9 +79,13 @@ namespace ArrayTest
                     }
                     tempArr[i] = innerArray[i];
                 }
-
+                innerArray = tempArr;
             }
-            innerArray = tempArr;
+            else
+            {
+                throw new Exception("item not found");
+            }
+            
         }
 
         public void ShowOnConsole()
