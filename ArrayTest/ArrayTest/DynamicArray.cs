@@ -8,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace ArrayTest
 {
-   public class DynamicArray
+    public class ItemNotFoundException : Exception
+    {
+        public ItemNotFoundException(string message)
+            : base(message)
+        { }
+
+    }
+    public class DynamicArray
     {
         private int[] innerArray;
 
@@ -52,7 +59,7 @@ namespace ArrayTest
             {
                 for (int i = 0; i < innerArray.Length; i++)
                 {
-                    if (innerArray[i]==item)
+                    if (innerArray[i] == item)
                     {
                         return i;
                     }
@@ -64,28 +71,30 @@ namespace ArrayTest
         public void Remove(int item)
         {
             int[] tempArr = new int[innerArray.Length - 1];
-            int index = Find(item);
-            if (index!=-1)
+            try
             {
-                for (int i = 0; i < innerArray.Length; i++)
+                if (!Contains(item))
                 {
-                    if (i==index)
-                    {
-                        for (int j = i; j < tempArr.Length; j++)
-                        {
-                            tempArr[j] = innerArray[j+1];
-                        }
-                        break;
-                    }
-                    tempArr[i] = innerArray[i];
+                    throw new ItemNotFoundException("Item not found");
                 }
-                innerArray = tempArr;
-            }
-            else
-            {
-                throw new Exception("item not found");
-            }
             
+           
+            int k = 0;
+            for (int i = 0; i < innerArray.Length; i++)
+            {
+                if (innerArray[i] != item)
+                {
+                    tempArr[k] = innerArray[i];
+                    k++;
+                }
+
+            }
+            innerArray = tempArr;
+            }
+            catch (ItemNotFoundException e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         public void ShowOnConsole()
@@ -96,6 +105,6 @@ namespace ArrayTest
             }
             Console.WriteLine();
         }
-        
+
     }
 }
