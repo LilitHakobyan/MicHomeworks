@@ -13,7 +13,7 @@ namespace ArrayTest
 
         public DynamicArray()
         {
-            innerArray = new int[1];
+            innerArray = new int[0];
         }
 
         public DynamicArray(int[] arr)
