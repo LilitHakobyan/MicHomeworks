@@ -8,22 +8,32 @@ namespace FindRandomNumber
 {
     class Player
     {
-        private int point;
-
-        public int Point
+        public int Point { get; private set; }
+        public int Answer { get; private set; }
+        public int IncScor()
         {
-            get { return point; }
-            set
-            {
-                if (value >= 0)
-                    point = value;
-                else
-                {
-                    Console.WriteLine("Player point must be > or = 0");
-                }
-            }
+            return Point++;
         }
 
+        
+        public void GenAnswer()
+        {
+            try
+            {
+                int Answer = Convert.ToInt32(Console.ReadLine());
+            }
+
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Upsss   !!!!!!!!!!!!!!!!!!!!!!!!!!");
+                GenAnswer();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
     }
 }
