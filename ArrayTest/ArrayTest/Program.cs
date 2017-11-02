@@ -16,7 +16,7 @@ namespace ArrayTest
             array.Add(15);
             array.ShowOnConsole();
             Console.WriteLine(array.Contains(0));
-            array.Remove(55);
+            array.Remove(5);
             array.ShowOnConsole();
             Console.ReadKey();
         }
