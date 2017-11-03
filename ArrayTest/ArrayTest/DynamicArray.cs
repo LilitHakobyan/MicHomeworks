@@ -32,10 +32,7 @@ namespace ArrayTest
         public void Add(int item)
         {
             int[] tempArr = new int[innerArray.Length + 1];
-            for (int i = 0; i < innerArray.Length; i++)
-            {
-                tempArr[i] = innerArray[i];
-            }
+            innerArray.CopyTo(tempArr, 0);
             tempArr[innerArray.Length] = item;
             innerArray = tempArr;
 
@@ -55,16 +52,14 @@ namespace ArrayTest
 
         public int Find(int item)
         {
-            if (Contains(item))
+            for (int i = 0; i < innerArray.Length; i++)
             {
-                for (int i = 0; i < innerArray.Length; i++)
+                if (innerArray[i] == item)
                 {
-                    if (innerArray[i] == item)
-                    {
-                        return i;
-                    }
+                    return i;
                 }
             }
+
             return -1;
         }
 
@@ -77,19 +72,17 @@ namespace ArrayTest
                 {
                     throw new ItemNotFoundException("Item not found");
                 }
-            
-           
-            int k = 0;
-            for (int i = 0; i < innerArray.Length; i++)
-            {
-                if (innerArray[i] != item)
+                int indexOfItem = Find(item);
+                for (int i = 0; i < indexOfItem; i++)
                 {
-                    tempArr[k] = innerArray[i];
-                    k++;
+                    tempArr[i] = innerArray[i];
                 }
+                for (int i = indexOfItem; i < tempArr.Length; i++)
+                {
+                        tempArr[i] = innerArray[i+1];
 
-            }
-            innerArray = tempArr;
+                }
+                innerArray = tempArr;
             }
             catch (ItemNotFoundException e)
             {
@@ -97,6 +90,13 @@ namespace ArrayTest
             }
         }
 
+        public void RemoveAll(int item)
+        {
+            while (Contains(item))
+            {          
+                Remove(item);
+            }
+        }
         public void ShowOnConsole()
         {
             for (int i = 0; i < innerArray.Length; i++)
