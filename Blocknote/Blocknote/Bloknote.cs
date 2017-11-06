@@ -122,16 +122,7 @@ namespace Blocknote
                 }
                 throw  new ArgumentException("Name index not found");
             }
-            set
-            {
-                for (int i = 0; i < recordArray.Length; i++)
-                {
-                    if (recordArray[i].Name == index)
-                    {
-                        recordArray[i] = value;
-                    }
-                }
-            }
+            
         }
 
         public void ShowOnConsole()
