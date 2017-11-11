@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlocknoteWithInitIList
 {
-    
+   
     class Blocknote:IList<Record>
     {
         private Record[] recordArray;
@@ -95,7 +95,7 @@ namespace BlocknoteWithInitIList
       
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return  GetEnumerator();
+            return GetEnumerator();
         }
 
 
