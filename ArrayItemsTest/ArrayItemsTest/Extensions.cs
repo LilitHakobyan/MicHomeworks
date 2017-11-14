@@ -19,7 +19,7 @@ namespace ArrayItemsTest
         }
 
         public static void MakeAction<T>(this IEnumerable<T> array,
-            ActionDelegate<T> action)
+            Action<T> action)
         {
             foreach (T item in array)
             {

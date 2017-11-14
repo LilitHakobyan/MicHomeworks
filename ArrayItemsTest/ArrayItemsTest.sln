@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayItemsTest", "ArrayItemsTest\ArrayItemsTest.csproj", "{65E5B84B-71B9-4A28-932E-7E7536C932F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelTest", "DelTest\DelTest.csproj", "{66184879-D388-42E8-8CD3-F70BFCBF5440}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{65E5B84B-71B9-4A28-932E-7E7536C932F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65E5B84B-71B9-4A28-932E-7E7536C932F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65E5B84B-71B9-4A28-932E-7E7536C932F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66184879-D388-42E8-8CD3-F70BFCBF5440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66184879-D388-42E8-8CD3-F70BFCBF5440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66184879-D388-42E8-8CD3-F70BFCBF5440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66184879-D388-42E8-8CD3-F70BFCBF5440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA97DABA-44A1-4DCC-81C8-BA8F09A91699}
 	EndGlobalSection
 EndGlobal
