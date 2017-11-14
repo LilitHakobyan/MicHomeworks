@@ -7,16 +7,10 @@ using System.Threading.Tasks;
 
 namespace BlocknoteWithInitIList
 {
-    class Record:IList<Record>
+    class Record
     {
         public string Name { get; set; }
         public string Phone { get; set; }
-
-        public int Count => throw new NotImplementedException();
-
-        public bool IsReadOnly => throw new NotImplementedException();
-
-        public Record this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Record(string name,string phon)
         {
