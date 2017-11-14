@@ -59,5 +59,6 @@ namespace MetanitExamples
             return hours * perhour;
 
         }
+
     }
 }
