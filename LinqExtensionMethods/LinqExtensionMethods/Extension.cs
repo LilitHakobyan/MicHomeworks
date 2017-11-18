@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace LinqExtensionMethods
 {
     public static class Extension
     {
+        
         #region Aggregate
         //
         // Summary:
@@ -83,9 +85,14 @@ namespace LinqExtensionMethods
         //     source or predicate is null.
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
             foreach (TSource s in source)
             {
-                if (predicate(s))
+                if (!predicate(s))
                     return false;
             }
             return true;
@@ -251,11 +258,165 @@ namespace LinqExtensionMethods
                 count++;
               
             }
-            return sum / count;
+            if (count != 0)
+                return sum / count;
+            throw new InvalidOperationException();
         }
 
         #endregion
 
+        #region Cast
+        //
+        // Summary:
+        //     Casts the elements of an System.Collections.IEnumerable to the specified type.
+        //
+        // Parameters:
+        //   source:
+        //     The System.Collections.IEnumerable that contains the elements to be cast to type
+        //     TResult.
+        //
+        // Type parameters:
+        //   TResult:
+        //     The type to cast the elements of source to.
+        //
+        // Returns:
+        //     An System.Collections.Generic.IEnumerable`1 that contains each element of the
+        //     source sequence cast to the specified type.
+        //
+        // Exceptions:
+        //   T:System.ArgumentNullException:
+        //     source is null.
+        //
+        //   T:System.InvalidCastException:
+        //     An element in the sequence cannot be cast to type TResult.
+        public static IEnumerable<TResult> Cast<TResult>(this IEnumerable source)
+        {
+            if (source==null)
+              throw new ArgumentNullException(nameof(source));
+            return OfTypeIterator<TResult>(source);
+        }
+
+        public static IEnumerable<TResult> OfTypeIterator<TResult>(IEnumerable source)
+        {
+            foreach (var obj in source)
+            {
+                if (obj is TResult)
+                {
+                    yield return (TResult)obj;
+                }
+            }
+        }
+        #endregion
+
+        #region Concat
+        //
+        // Summary:
+        //     Concatenates two sequences.
+        //
+        // Parameters:
+        //   first:
+        //     The first sequence to concatenate.
+        //
+        //   second:
+        //     The sequence to concatenate to the first sequence.
+        //
+        // Type parameters:
+        //   TSource:
+        //     The type of the elements of the input sequences.
+        //
+        // Returns:
+        //     An System.Collections.Generic.IEnumerable`1 that contains the concatenated elements
+        //     of the two input sequences.
+        //
+        // Exceptions:
+        //   T:System.ArgumentNullException:
+        //     first or second is null.
+        public static IEnumerable<TSource> Concat<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
+        {
+            if (first==null)
+            throw new ArgumentNullException(nameof(first));
+            if (second==null)
+            throw new ArgumentNullException(nameof(second));
+            foreach (TSource firstSource in first)
+                yield return firstSource;
+            foreach (TSource secSource in second)
+                yield return secSource;
+        }
+        #endregion
+
+        #region Contains
+        //
+        // Summary:
+        //     Determines whether a sequence contains a specified element by using the default
+        //     equality comparer.
+        //
+        // Parameters:
+        //   source:
+        //     A sequence in which to locate a value.
+        //
+        //   value:
+        //     The value to locate in the sequence.
+        //
+        // Type parameters:
+        //   TSource:
+        //     The type of the elements of source.
+        //
+        // Returns:
+        //     true if the source sequence contains an element that has the specified value;
+        //     otherwise, false.
+        //
+        // Exceptions:
+        //   T:System.ArgumentNullException:
+        //     source is null.
+        public static bool Contains<TSource>(this IEnumerable<TSource> source, TSource value)
+        {
+            if (source==null)
+            throw new ArgumentNullException(nameof(source));
+            foreach (TSource itemSource in source)
+            {
+                if (value.Equals(itemSource))
+                    return true;
+            }
+            return false;
+        }
+        //
+        // Summary:
+        //     Determines whether a sequence contains a specified element by using a specified
+        //     System.Collections.Generic.IEqualityComparer`1.
+        //
+        // Parameters:
+        //   source:
+        //     A sequence in which to locate a value.
+        //
+        //   value:
+        //     The value to locate in the sequence.
+        //
+        //   comparer:
+        //     An equality comparer to compare values.
+        //
+        // Type parameters:
+        //   TSource:
+        //     The type of the elements of source.
+        //
+        // Returns:
+        //     true if the source sequence contains an element that has the specified value;
+        //     otherwise, false.
+        //
+        // Exceptions:
+        //   T:System.ArgumentNullException:
+        //     source is null.
+        public static bool Contains<TSource>(this IEnumerable<TSource> source, TSource value, IEqualityComparer<TSource> comparer)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            foreach (TSource itemSource in source)
+            {
+                if (comparer.Equals(itemSource,value))
+                    return true;
+            }
+            return false;
+        }
+        #endregion
 
 
     }
