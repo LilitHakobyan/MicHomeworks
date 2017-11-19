@@ -10,6 +10,10 @@ namespace LinqExtensionMethods
     {
         static void Main(string[] args)
         {
+            int ten = 10;
+            int i3 = 2147483647 + ten;
+            Console.WriteLine(i3);
+
         }
     }
 }
