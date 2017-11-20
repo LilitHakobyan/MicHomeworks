@@ -61,8 +61,7 @@ namespace Operator_Overloads
 
         public override string ToString()
         {
-            if (this.Real == 0)
-                return $"({this.Real})+({this.Im})i";
+            return $"({this.Real})+({this.Im})i";
 
         }
     }
