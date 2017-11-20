@@ -31,7 +31,7 @@ namespace Operator_Overloads
         }
         public static ComplexNumber operator /(ComplexNumber c1, ComplexNumber c2)
         {
-            return new ComplexNumber(c1.Real / c2.Real, c1.Im / c2.Im);// haves chunem 
+            return new ComplexNumber(c1.Real / c2.Real, c1.Im / c2.Im);// haves chunem
         }
 
         public static bool operator ==(ComplexNumber c1, ComplexNumber c2)
