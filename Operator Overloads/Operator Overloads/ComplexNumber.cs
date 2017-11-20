@@ -58,5 +58,12 @@ namespace Operator_Overloads
         {
             return (this.Real.GetHashCode()^this.Im.GetHashCode());
         }
+
+        public override string ToString()
+        {
+            if (this.Real == 0)
+                return $"({this.Real})+({this.Im})i";
+
+        }
     }
 }
