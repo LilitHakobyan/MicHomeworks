@@ -16,7 +16,6 @@ namespace BlocknoteWithInitIList
             {
                 using (StreamWriter sw = File.AppendText(filePath))
                 {
-                    sw.WriteLine();
                     foreach (Record record in blocknote)
                     {
                         sw.WriteLine(record.WritingStyle());

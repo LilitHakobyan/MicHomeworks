@@ -35,7 +35,7 @@ namespace BlocknoteWithInitIList
             bloknote.Add(new Record("Adam", "87952879218"));
             bloknote.Add(new Record("Semy", "98151158754"));
             bloknote.Add(new Record("Gary", "75495620557"));
-
+            bloknote.Remove(new Record("Armen", "098000000"));
             string filePath = @"E:\Blocknote\block.txt";
 
            bloknote.WriteInFile(filePath);
