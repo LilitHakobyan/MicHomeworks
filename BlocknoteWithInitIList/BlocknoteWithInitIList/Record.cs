@@ -32,7 +32,7 @@ namespace BlocknoteWithInitIList
 
         public override string ToString()
         {
-            return $"Name: {Name}_______Phon: {Phone}";
+            return $"Name: {Name} Phon: {Phone}";
         }
 
        
