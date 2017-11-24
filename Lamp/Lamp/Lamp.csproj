@@ -44,9 +44,13 @@
   <ItemGroup>
     <Compile Include="GasLamp.cs" />
     <Compile Include="ILighter.cs" />
+    <Compile Include="Ligher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Switcher.cs" />
+    <Compile Include="SwitcherChangedEventHandler.cs" />
+    <Compile Include="SwitcherStatus.cs" />
+    <Compile Include="SwitcherUsingEv.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

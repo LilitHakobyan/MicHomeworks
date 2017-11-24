@@ -10,10 +10,13 @@ namespace Lamp
     {
         static void Main(string[] args)
         {
-            Switcher sw = new Switcher(new GasLamp());
+            //Switcher sw = new Switcher(new GasLamp());
 
-            sw.SwitchOn();
-            sw.SwitchOff();
+            //sw.SwitchOn();
+            //sw.SwitchOff();
+            SwitcherUsingEv switcher=new SwitcherUsingEv();
+            Ligher l= new Ligher(switcher);
+            switcher.Off();
         }
     }
 }
