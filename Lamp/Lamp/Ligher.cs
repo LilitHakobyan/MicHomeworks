@@ -31,13 +31,13 @@ namespace Lamp
             }
         }
 
-        private void On()
+        public void On()
         {
-            Console.WriteLine("On");
+            Console.WriteLine("Light On");
         }
-        private void Off()
+        public void Off()
         {
-            Console.WriteLine("Off");
+            Console.WriteLine("Light Off");
         }
     }
 }
