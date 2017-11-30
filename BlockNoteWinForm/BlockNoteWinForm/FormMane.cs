@@ -47,6 +47,7 @@ namespace BlockNoteWinForm
                 };
                 blocknot.Add(record);
             }
+
         }
     }
 }
