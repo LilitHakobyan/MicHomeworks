@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tic_Tac_Toe
@@ -68,24 +61,26 @@ namespace Tic_Tac_Toe
         }
         private Button LookButtonCorner(string look)
         {
+            if (btn22.Text == string.Empty)
+                return btn22;
             if (btn11.Text == look)
             {
-                if (btn13.Text == string.Empty)
-                    return btn13;
                 if (btn33.Text == string.Empty)
                     return btn33;
                 if (btn31.Text == string.Empty)
                     return btn31;
+                if (btn13.Text == string.Empty)
+                    return btn13;
             }
 
             if (btn13.Text == look)
             {
+                if (btn31.Text == string.Empty)
+                    return btn31;
                 if (btn11.Text == string.Empty)
                     return btn11;
                 if (btn33.Text == string.Empty)
                     return btn33;
-                if (btn31.Text == string.Empty)
-                    return btn31;
             }
 
             if (btn33.Text == look)
@@ -100,14 +95,16 @@ namespace Tic_Tac_Toe
 
             if (btn31.Text == look)
             {
-                if (btn11.Text == string.Empty)
-                    return btn11;
                 if (btn13.Text == string.Empty)
                     return btn13;
+                if (btn11.Text == string.Empty)
+                    return btn11;
                 if (btn33.Text == string.Empty)
                     return btn33;
             }
 
+            //if (btn22.Text == string.Empty)
+            //    return btn22;
             if (btn11.Text == string.Empty)
                 return btn11;
             if (btn13.Text == string.Empty)
@@ -189,7 +186,7 @@ namespace Tic_Tac_Toe
                 return btn31;
             if ((btn13.Text == look) && (btn31.Text == look) && (btn22.Text == string.Empty))
                 return btn22;
-            if ((btn22.Text == look) && (btn33.Text == look) && (btn13.Text == string.Empty))
+            if ((btn22.Text == look) && (btn31.Text == look) && (btn13.Text == string.Empty))
                 return btn13;
 
             return null;
@@ -297,6 +294,11 @@ namespace Tic_Tac_Toe
             compPlayer = false;
             Player2.Text = "Player2 Win Count";
             resetToolStripMenuItem_Click(sender, e);
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"https://en.wikipedia.org/wiki/Tic-tac-toe", "HelpLink");
         }
     }
 }
