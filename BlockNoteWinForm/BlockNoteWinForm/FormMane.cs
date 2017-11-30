@@ -32,8 +32,6 @@ namespace BlockNoteWinForm
                     break;
             }
         }
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             FormAddRecord formAdd =new FormAddRecord();
@@ -47,7 +45,6 @@ namespace BlockNoteWinForm
                 };
                 blocknot.Add(record);
             }
-
         }
     }
 }
