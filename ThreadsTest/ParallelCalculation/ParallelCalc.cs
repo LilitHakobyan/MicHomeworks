@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace ParallelCalculation
 {
     class ParallelCalc
     {
         public long[] results;
         public Thread[] threads;
-
+        public long time;
 
         public long MaxNum { get; set; }
         public int ThCount { get; set; }
@@ -29,7 +30,6 @@ namespace ParallelCalculation
             {
                 res += i;
             }
-            
         }
         public void Start()
         {
@@ -46,10 +46,20 @@ namespace ParallelCalculation
 
                 threads[i].Start();
             }
-
             while (threads.Any(t => t.IsAlive));
+            //for (int i = 0; i < ThCount; i++)
+            //{
+            //    threads[i].Join();
+            //}
             sw.Stop();
-            Finished?.Invoke(this,new CalcParallelEventArgs(){Result = results.Sum(),TCount =ThCount,Time =sw.ElapsedMilliseconds });
+            time = sw.ElapsedMilliseconds;
+            Finished?.Invoke(this, new CalcParallelEventArgs() { Result = results.Sum(), TCount = ThCount, Time = time });
+            //Stopwatch sw1 = new Stopwatch();
+            //sw.Start();
+            //Parallel.For(0, ThCount, j => Sum((MaxNum / ThCount) * j, (MaxNum / ThCount) * (j + 1), ref results[j]));
+            //sw1.Stop();
+            //Finished?.Invoke(this, new CalcParallelEventArgs() { Result = results.Sum(), TCount = ThCount, Time = sw.ElapsedMilliseconds });
+
 
 
         }

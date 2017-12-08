@@ -14,9 +14,15 @@ namespace ParallelCalculation
         }
         static void Main(string[] args)
         {    
-            ParallelCalc pCalc=new ParallelCalc((long)1E07, 500);
-            pCalc.Finished += ParallelCalc_Finished;
-            pCalc.Start();
+            Dictionary<long,long > dictionaryResult=new Dictionary<long, long>();
+            for (int i = 100; i < 500; i++)
+            {
+                ParallelCalc pCalc = new ParallelCalc((long)1E07, i);
+                pCalc.Finished += ParallelCalc_Finished;
+                pCalc.Start();
+                dictionaryResult.Add(i,pCalc.time);
+            }
+            WriteInExcel.Log(dictionaryResult);
         }
 
     }
