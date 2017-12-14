@@ -116,37 +116,81 @@ namespace Saloon_Car
                     }
                 }
             }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Please Choose a line");
-            }
+           
             catch (Exception)
             {
-                MessageBox.Show("");
+                MessageBox.Show(@"Please Choose a line");
             }
 
         }
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            DataViewModel viewModels = (DataViewModel)dataGridView1.SelectedRows[0]?.DataBoundItem;
-            //viewModels[0].Price = 0;
-            DataViewModel carItem = dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
-            carItem.Deleted = true;
-
-            Car findCar = FindCarItem(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
-
-            if (findCar == null)
+            try
             {
-                MessageBox.Show("Car not found");
+                DataViewModel viewModels = (DataViewModel)dataGridView1.SelectedRows[0]?.DataBoundItem;
+                DataViewModel carItem = dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
+                carItem.Deleted = true;
+
+                Car findCar = FindCarItem(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
+
+                if (findCar == null)
+                {
+                    MessageBox.Show(@"Car not found");
+                }
+                else
+                {
+                    findCar.Deleted = true;
+                    RerefreshGridAndData();
+                }
             }
-            else
+            catch (Exception)
             {
-                findCar.Deleted = true;
-                RerefreshGridAndData();
+                MessageBox.Show(@"Please Choose a line");
             }
+
         }
+        private void Buy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataViewModel viewModels = (DataViewModel)dataGridView1.SelectedRows[0]?.DataBoundItem;
+                DataViewModel carItem = dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
+                if (carItem.Deleted == true)
+                {
+                    MessageBox.Show(@"Car id deleted");
+                }
+                else
+                {
+                    if (carItem.Sold == true)
+                    {
+                        MessageBox.Show(@"Car id sold");
+                    }
+                    else
+                    {
+                        carItem.Sold = true;
 
+                        Car findCar = FindCarItem(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
+
+                        if (findCar == null)
+                        {
+                            MessageBox.Show(@"Car not found");
+                        }
+                        else
+                        {
+                            findCar.Sold = true;
+                            RerefreshGridAndData();
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(@"Please Choose a line");
+            }
+
+        }
         public void RerefreshGridAndData()
         {
             dataGridView1.DataSource = null;
