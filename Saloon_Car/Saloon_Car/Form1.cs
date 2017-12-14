@@ -19,12 +19,40 @@ namespace Saloon_Car
         string DataPath =string.Empty;
         Saloon saloon = new Saloon("Avto.am");
         List<Brand> brendList = new List<Brand>();
+        private string userName;
+        private UserEnum Role;
         public Form1()
         {
+            GetUser();
             InitializeComponent();
+            Vizible();
             Initializer();
         }
 
+        public void GetUser()
+        {
+            LogInPage formLogIn = new LogInPage();
+            formLogIn.ShowDialog();
+            if (formLogIn.DialogResult == DialogResult.OK)
+            {
+                userName = formLogIn.Name;
+                Role = formLogIn.Role;
+            }
+        }
+        public void Vizible()
+        {
+            if (Role==UserEnum.User)
+            {
+                this.button1.Visible = false;
+                this.button2.Visible = false;
+                this.button3.Visible = false;
+            }
+            else
+            {
+                this.button4.Visible = false;
+                this.button5.Visible = false;
+            }
+        }
         public void Initializer()
         {
             try
@@ -89,7 +117,6 @@ namespace Saloon_Car
             try
             {
                 DataViewModel viewModels = (DataViewModel)dataGridView1.SelectedRows[0]?.DataBoundItem;
-                //viewModels[0].Price = 0;
                 DataViewModel carItem = dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
                 FormAddChangeCar formAdd =
                     new FormAddChangeCar(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
@@ -214,18 +241,21 @@ namespace Saloon_Car
         {
             FormAddChangeCar formAdd = new FormAddChangeCar(true);
             formAdd.ShowDialog();
-            Car findCar = FindCarItem(formAdd.BrandName, formAdd.ModelName, formAdd.ModelColor);
-            if (findCar == null)
+            if (formAdd.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(@"Car not found");
-            }
-            else
-            {
-                var rowId = dataViewModels.FirstOrDefault(item =>
-                    item.Brand == findCar.Model.Brand.Name && item.Model == findCar.Model.Name &&
-                    item.Color == findCar.Model.Color).Id;
-                dataGridView1.Rows[rowId - 1].Selected = true;
+                Car findCar = FindCarItem(formAdd.BrandName, formAdd.ModelName, formAdd.ModelColor);
+                if (findCar == null)
+                {
+                    MessageBox.Show(@"Car not found");
+                }
+                else
+                {
+                    var rowId = dataViewModels.FirstOrDefault(item =>
+                        item.Brand == findCar.Model.Brand.Name && item.Model == findCar.Model.Name &&
+                        item.Color == findCar.Model.Color).Id;
+                    dataGridView1.Rows[rowId - 1].Selected = true;
 
+                }
             }
 
         }
@@ -252,8 +282,6 @@ namespace Saloon_Car
                 );
                 return resultCar;
             }
-
-
         }
     }
 }

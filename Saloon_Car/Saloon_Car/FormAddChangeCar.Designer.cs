@@ -86,46 +86,51 @@
             // lBrand
             // 
             this.lBrand.AutoSize = true;
+            this.lBrand.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lBrand.Location = new System.Drawing.Point(18, 42);
             this.lBrand.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lBrand.Name = "lBrand";
-            this.lBrand.Size = new System.Drawing.Size(49, 16);
+            this.lBrand.Size = new System.Drawing.Size(58, 24);
             this.lBrand.TabIndex = 5;
             this.lBrand.Text = "Brand";
             // 
             // lModelName
             // 
             this.lModelName.AutoSize = true;
+            this.lModelName.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lModelName.Location = new System.Drawing.Point(18, 94);
             this.lModelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lModelName.Name = "lModelName";
-            this.lModelName.Size = new System.Drawing.Size(96, 16);
+            this.lModelName.Size = new System.Drawing.Size(106, 24);
             this.lModelName.TabIndex = 6;
             this.lModelName.Text = "Model Name";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 154);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 16);
+            this.label3.Size = new System.Drawing.Size(108, 24);
             this.label3.TabIndex = 7;
             this.label3.Text = "Model Color";
             // 
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
+            this.labelPrice.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPrice.Location = new System.Drawing.Point(18, 203);
             this.labelPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(44, 16);
+            this.labelPrice.Size = new System.Drawing.Size(48, 24);
             this.labelPrice.TabIndex = 8;
             this.labelPrice.Text = "Price";
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.button1.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(30, 264);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 34);
@@ -137,6 +142,7 @@
             // Cncel
             // 
             this.Cncel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.Cncel.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cncel.Location = new System.Drawing.Point(238, 264);
             this.Cncel.Name = "Cncel";
             this.Cncel.Size = new System.Drawing.Size(158, 34);
@@ -167,7 +173,6 @@
             this.MaximizeBox = false;
             this.Name = "FormAddChangeCar";
             this.Text = "FormAddCar";
-            this.Load += new System.EventHandler(this.FormAddChangeCar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

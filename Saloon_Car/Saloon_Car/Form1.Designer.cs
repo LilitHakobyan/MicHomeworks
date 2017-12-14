@@ -51,6 +51,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(18, 52);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
@@ -87,6 +88,7 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(187, 52);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
@@ -98,6 +100,7 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(357, 52);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
@@ -109,6 +112,7 @@
             // 
             // button4
             // 
+            this.button4.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(734, 51);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
@@ -120,6 +124,7 @@
             // 
             // button5
             // 
+            this.button5.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Location = new System.Drawing.Point(902, 51);
             this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
@@ -131,6 +136,7 @@
             // 
             // button6
             // 
+            this.button6.Font = new System.Drawing.Font("Papyrus", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.Location = new System.Drawing.Point(902, 545);
             this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";

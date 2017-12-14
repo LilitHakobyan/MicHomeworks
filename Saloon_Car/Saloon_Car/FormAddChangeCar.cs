@@ -95,10 +95,5 @@ namespace Saloon_Car
         {
             this.DialogResult = DialogResult.Cancel;
         }
-
-        private void FormAddChangeCar_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
