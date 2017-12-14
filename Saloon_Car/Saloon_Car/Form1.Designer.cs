@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
@@ -50,9 +51,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 43);
+            this.button1.Location = new System.Drawing.Point(18, 52);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 46);
+            this.button1.Size = new System.Drawing.Size(160, 57);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
@@ -64,7 +66,7 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.Azure;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
@@ -75,17 +77,19 @@
             this.soldDataGridViewCheckBoxColumn,
             this.deletedDataGridViewCheckBoxColumn});
             this.dataGridView1.DataSource = this.dataViewModelBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 154);
+            this.dataGridView1.Location = new System.Drawing.Point(18, 173);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(740, 284);
+            this.dataGridView1.Size = new System.Drawing.Size(1034, 349);
             this.dataGridView1.TabIndex = 1;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(125, 43);
+            this.button2.Location = new System.Drawing.Point(187, 52);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 45);
+            this.button2.Size = new System.Drawing.Size(160, 55);
             this.button2.TabIndex = 2;
             this.button2.Text = "Edit";
             this.button2.UseVisualStyleBackColor = true;
@@ -93,9 +97,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(238, 42);
+            this.button3.Location = new System.Drawing.Point(357, 52);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 46);
+            this.button3.Size = new System.Drawing.Size(160, 57);
             this.button3.TabIndex = 3;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
@@ -103,9 +108,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(553, 41);
+            this.button4.Location = new System.Drawing.Point(734, 51);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 46);
+            this.button4.Size = new System.Drawing.Size(144, 57);
             this.button4.TabIndex = 4;
             this.button4.Text = "Search";
             this.button4.UseVisualStyleBackColor = true;
@@ -113,9 +119,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(655, 42);
+            this.button5.Location = new System.Drawing.Point(902, 51);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(97, 45);
+            this.button5.Size = new System.Drawing.Size(146, 55);
             this.button5.TabIndex = 5;
             this.button5.Text = "Buy";
             this.button5.UseVisualStyleBackColor = true;
@@ -123,9 +130,10 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(652, 444);
+            this.button6.Location = new System.Drawing.Point(902, 545);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 35);
+            this.button6.Size = new System.Drawing.Size(150, 44);
             this.button6.TabIndex = 6;
             this.button6.Text = "Close";
             this.button6.UseVisualStyleBackColor = true;
@@ -141,38 +149,47 @@
             // 
             // brandDataGridViewTextBoxColumn
             // 
+            this.brandDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.brandDataGridViewTextBoxColumn.DataPropertyName = "Brand";
             this.brandDataGridViewTextBoxColumn.Frozen = true;
             this.brandDataGridViewTextBoxColumn.HeaderText = "Brand";
             this.brandDataGridViewTextBoxColumn.Name = "brandDataGridViewTextBoxColumn";
             this.brandDataGridViewTextBoxColumn.ReadOnly = true;
+            this.brandDataGridViewTextBoxColumn.Width = 200;
             // 
             // modelDataGridViewTextBoxColumn
             // 
+            this.modelDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.modelDataGridViewTextBoxColumn.DataPropertyName = "Model";
             this.modelDataGridViewTextBoxColumn.Frozen = true;
             this.modelDataGridViewTextBoxColumn.HeaderText = "Model";
             this.modelDataGridViewTextBoxColumn.Name = "modelDataGridViewTextBoxColumn";
             this.modelDataGridViewTextBoxColumn.ReadOnly = true;
+            this.modelDataGridViewTextBoxColumn.Width = 200;
             // 
             // colorDataGridViewTextBoxColumn
             // 
+            this.colorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colorDataGridViewTextBoxColumn.DataPropertyName = "Color";
             this.colorDataGridViewTextBoxColumn.Frozen = true;
             this.colorDataGridViewTextBoxColumn.HeaderText = "Color";
             this.colorDataGridViewTextBoxColumn.Name = "colorDataGridViewTextBoxColumn";
             this.colorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.colorDataGridViewTextBoxColumn.Width = 150;
             // 
             // priceDataGridViewTextBoxColumn
             // 
+            this.priceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
             this.priceDataGridViewTextBoxColumn.Frozen = true;
             this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             this.priceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.priceDataGridViewTextBoxColumn.Width = 150;
             // 
             // soldDataGridViewCheckBoxColumn
             // 
+            this.soldDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.soldDataGridViewCheckBoxColumn.DataPropertyName = "Sold";
             this.soldDataGridViewCheckBoxColumn.Frozen = true;
             this.soldDataGridViewCheckBoxColumn.HeaderText = "Sold";
@@ -181,6 +198,7 @@
             // 
             // deletedDataGridViewCheckBoxColumn
             // 
+            this.deletedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.deletedDataGridViewCheckBoxColumn.DataPropertyName = "Deleted";
             this.deletedDataGridViewCheckBoxColumn.Frozen = true;
             this.deletedDataGridViewCheckBoxColumn.HeaderText = "Deleted";
@@ -193,9 +211,11 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 481);
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1065, 592);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -203,6 +223,10 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
