@@ -16,7 +16,7 @@ namespace Saloon_Car
     {
         private List<DataViewModel> dataViewModels;
         private int i;
-
+        string DataPath =string.Empty;
         Saloon saloon = new Saloon("Avto.am");
         List<Brand> brendList = new List<Brand>();
         public Form1()
@@ -29,8 +29,9 @@ namespace Saloon_Car
         {
             try
             {
+                DataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\salon.log";
                 dataGridView1.MultiSelect = false;
-                dataViewModels = JsonConvert.DeserializeObject<List<DataViewModel>>(File.ReadAllText(@"E:\salon.log"));
+                dataViewModels = JsonConvert.DeserializeObject<List<DataViewModel>>(File.ReadAllText(DataPath));
                 dataGridView1.DataSource = dataViewModels;
                 i = dataViewModels.Last().Id;
                 foreach (DataViewModel viewModel in dataViewModels)
@@ -200,7 +201,8 @@ namespace Saloon_Car
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
-            File.WriteAllText(@"E:\salon.log", serializeString);
+            File.WriteAllText(DataPath, serializeString);
+            
         }
 
         private void Close_Click(object sender, EventArgs e)
