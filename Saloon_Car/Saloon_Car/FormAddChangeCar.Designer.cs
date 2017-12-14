@@ -43,7 +43,7 @@
             // 
             // txtBrand
             // 
-            this.txtBrand.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtBrand.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtBrand.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBrand.Location = new System.Drawing.Point(156, 33);
             this.txtBrand.Margin = new System.Windows.Forms.Padding(4);
@@ -53,7 +53,7 @@
             // 
             // txtModelName
             // 
-            this.txtModelName.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtModelName.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtModelName.Location = new System.Drawing.Point(156, 85);
             this.txtModelName.Margin = new System.Windows.Forms.Padding(4);
@@ -63,7 +63,7 @@
             // 
             // txtModelColor
             // 
-            this.txtModelColor.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtModelColor.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtModelColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtModelColor.Location = new System.Drawing.Point(156, 145);
             this.txtModelColor.Margin = new System.Windows.Forms.Padding(4);
@@ -73,7 +73,7 @@
             // 
             // txtPrice
             // 
-            this.txtPrice.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtPrice.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtPrice.Location = new System.Drawing.Point(156, 193);
             this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
@@ -149,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(492, 321);
             this.Controls.Add(this.Cncel);
             this.Controls.Add(this.button1);
@@ -167,6 +167,7 @@
             this.MaximizeBox = false;
             this.Name = "FormAddChangeCar";
             this.Text = "FormAddCar";
+            this.Load += new System.EventHandler(this.FormAddChangeCar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

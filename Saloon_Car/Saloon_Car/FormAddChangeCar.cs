@@ -81,6 +81,8 @@ namespace Saloon_Car
             try
             {
                 this.Price = double.Parse(txtP);
+                if (double.Parse(txtP) < 0)
+                    return false;
                 return true;
 
             }
@@ -92,6 +94,11 @@ namespace Saloon_Car
         private void Cncel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void FormAddChangeCar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
