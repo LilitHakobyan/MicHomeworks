@@ -10,6 +10,7 @@ namespace ValueTypes
     {
         static void Main(string[] args)
         {
+           
            // Point m;
            //// p.x = 10;
            // int x = new int();

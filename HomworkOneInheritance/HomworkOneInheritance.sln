@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomworkOneInheritance", "HomworkOneInheritance\HomworkOneInheritance.csproj", "{79A33315-42DB-429E-B9E5-F7CEEF60A10C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee", "Employee\Employee.csproj", "{94E0B5F5-276E-4512-80C3-2C702291EA91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEnumerablTest", "IEnumerablTest\IEnumerablTest.csproj", "{7120046E-E7E1-4086-9BE2-0CFA80FC2DAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94E0B5F5-276E-4512-80C3-2C702291EA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7120046E-E7E1-4086-9BE2-0CFA80FC2DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7120046E-E7E1-4086-9BE2-0CFA80FC2DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7120046E-E7E1-4086-9BE2-0CFA80FC2DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7120046E-E7E1-4086-9BE2-0CFA80FC2DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80A5FF4C-BE3B-42B2-9DF6-BD725745F670}
 	EndGlobalSection
 EndGlobal

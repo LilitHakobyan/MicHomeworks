@@ -8,10 +8,10 @@ namespace ValueTypes
 {
     struct StructTest
     {
-        public int x;
-        public int y;
+        public  int x;
+        public static int y;
 
-        public StructTest(int x)
+        public   StructTest(int x)
         {
             this.x = x;
             y = 20;
@@ -47,6 +47,7 @@ namespace ValueTypes
             y = 20;
         }
 
+        
         public void F(ClassTest st)
         {
             //this = st; //error  this@ ays depqum hasce e ev hnaravor che poxel
