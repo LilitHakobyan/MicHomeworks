@@ -14,39 +14,50 @@ namespace Saloon_Car
 {
     public partial class Form1 : Form
     {
-        private int i = 0;
-        List<DataViewModel> dataViewModels = new List<DataViewModel>();
+        private List<DataViewModel> dataViewModels;
+        private int i;
 
         Saloon saloon = new Saloon("Avto.am");
         List<Brand> brendList = new List<Brand>();
         public Form1()
         {
             InitializeComponent();
-            dataGridView1.MultiSelect = false;
-            dataViewModels = JsonConvert.DeserializeObject<List<DataViewModel>>(File.ReadAllText(@"E:\salon.log"));
-            dataGridView1.DataSource = dataViewModels;
-            foreach (DataViewModel viewModel in dataViewModels)
-            {
-                CreateNewItem(viewModel.Brand, viewModel.Model, viewModel.Color, viewModel.Price);
-
-            }
+            Initializer();
         }
 
+        public void Initializer()
+        {
+            try
+            {
+                dataGridView1.MultiSelect = false;
+                dataViewModels = JsonConvert.DeserializeObject<List<DataViewModel>>(File.ReadAllText(@"E:\salon.log"));
+                dataGridView1.DataSource = dataViewModels;
+                i = dataViewModels.Last().Id;
+                foreach (DataViewModel viewModel in dataViewModels)
+                {
+                    CreateNewItem(viewModel.Brand, viewModel.Model, viewModel.Color, viewModel.Price);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
         private void buttonADD_Click(object sender, EventArgs e)
         {
-           
-            FormAddCar formAdd = new FormAddCar();
+
+            FormAddChangeCar formAdd = new FormAddChangeCar();
             formAdd.ShowDialog();
             if (formAdd.DialogResult == DialogResult.OK)
             {
                 CreateNewItem(formAdd.BrandName, formAdd.ModelName, formAdd.ModelColor, formAdd.Price);
-                dataViewModels.Add(new DataViewModel { Id = ++i, Brand = formAdd.BrandName, Model = formAdd.ModelName, Color = formAdd.ModelColor, Price = formAdd.Price,Sold = false});
+                dataViewModels.Add(new DataViewModel { Id = ++i, Brand = formAdd.BrandName, Model = formAdd.ModelName, Color = formAdd.ModelColor, Price = formAdd.Price, Sold = false });//
                 RerefreshGridAndData();
             }
 
         }
 
-        private void CreateNewItem(string brandName,string modelName, string modelColor,double price)
+        private void CreateNewItem(string brandName, string modelName, string modelColor, double price)
         {
             Brand brand = new Brand();
             foreach (Brand item in brendList)
@@ -74,41 +85,44 @@ namespace Saloon_Car
         }
         private void Edit_Click(object sender, EventArgs e)
         {
-            DataViewModel viewModels = (DataViewModel)dataGridView1.SelectedRows[0]?.DataBoundItem;
-            //viewModels[0].Price = 0;
-            DataViewModel carItem= dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
-            FormAddCar formAdd = new FormAddCar(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
-            formAdd.ShowDialog();
-            if (formAdd.DialogResult == DialogResult.OK)
+            try
             {
-              var FindCar=  saloon.cars.FirstOrDefault(item =>
-                    item.Model.Brand.Name == carItem.Brand &&
-                    item.Model.Name == carItem.Model &&
-                    item.Model.Color == carItem.Color &&
-                    item.Price == carItem.Price
-
-                );
-                if (FindCar == null)
+                DataViewModel viewModels = (DataViewModel)dataGridView1.SelectedRows[0]?.DataBoundItem;
+                //viewModels[0].Price = 0;
+                DataViewModel carItem = dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
+                FormAddChangeCar formAdd =
+                    new FormAddChangeCar(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
+                formAdd.ShowDialog();
+                if (formAdd.DialogResult == DialogResult.OK)
                 {
-                    MessageBox.Show("Car not found");
-                    
-                }
-                else
-                {
-                    carItem.Brand = formAdd.BrandName;
-                    carItem.Model = formAdd.ModelName;
-                    carItem.Color = formAdd.ModelColor;
-                    carItem.Price = formAdd.Price;
+                    Car findCar = FindCarItem(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
 
-                    FindCar.Model.Brand.Name = formAdd.BrandName;
-                    FindCar.Model.Name = formAdd.ModelName;
-                    FindCar.Model.Color = formAdd.ModelColor;
-                    FindCar.Price = carItem.Price;
-                    RerefreshGridAndData();
-                }
-               
+                    if (findCar == null)
+                    {
+                        MessageBox.Show("Car not found");
+                    }
+                    else
+                    {
+                        carItem.Brand = formAdd.BrandName;
+                        carItem.Model = formAdd.ModelName;
+                        carItem.Color = formAdd.ModelColor;
+                        carItem.Price = formAdd.Price;
 
-               
+                        findCar.Model.Brand.Name = formAdd.BrandName;
+                        findCar.Model.Name = formAdd.ModelName;
+                        findCar.Model.Color = formAdd.ModelColor;
+                        findCar.Price = carItem.Price;
+                        RerefreshGridAndData();
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Please Choose a line");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("");
             }
 
         }
@@ -120,25 +134,17 @@ namespace Saloon_Car
             DataViewModel carItem = dataViewModels.FirstOrDefault(x => x.Id == viewModels.Id);
             carItem.Deleted = true;
 
-            var FindCar = saloon.cars.FirstOrDefault(item =>
-                item.Model.Brand.Name == carItem.Brand &&
-                item.Model.Name == carItem.Model &&
-                item.Model.Color == carItem.Color &&
-                item.Price == carItem.Price
+            Car findCar = FindCarItem(carItem.Brand, carItem.Model, carItem.Color, carItem.Price);
 
-            );
-            if (FindCar == null)
+            if (findCar == null)
             {
                 MessageBox.Show("Car not found");
             }
             else
             {
-                FindCar.Deleted = true;
+                findCar.Deleted = true;
                 RerefreshGridAndData();
             }
-          
-
-
         }
 
         public void RerefreshGridAndData()
@@ -151,6 +157,57 @@ namespace Saloon_Car
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
             File.WriteAllText(@"E:\salon.log", serializeString);
+        }
+
+        private void Close_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+            FormAddChangeCar formAdd = new FormAddChangeCar(true);
+            formAdd.ShowDialog();
+            Car findCar = FindCarItem(formAdd.BrandName, formAdd.ModelName, formAdd.ModelColor);
+            if (findCar == null)
+            {
+                MessageBox.Show(@"Car not found");
+            }
+            else
+            {
+                var rowId = dataViewModels.FirstOrDefault(item =>
+                    item.Brand == findCar.Model.Brand.Name && item.Model == findCar.Model.Name &&
+                    item.Color == findCar.Model.Color).Id;
+                dataGridView1.Rows[rowId - 1].Selected = true;
+
+            }
+
+        }
+
+        private Car FindCarItem(string brandName, string modelName, string modelColor,
+            double price = 0.0)
+        {
+            if (price == 0.0)
+            {
+                Car resultCar = saloon.cars.FirstOrDefault(item =>
+                    item.Model.Brand.Name.ToLower() == brandName.ToLower() &&
+                    item.Model.Name.ToLower() == modelName.ToLower() &&
+                    item.Model.Color.ToLower() == modelColor.ToLower()
+                );
+                return resultCar;
+            }
+            else
+            {
+                Car resultCar = saloon.cars.FirstOrDefault(item =>
+                    item.Model.Brand.Name == brandName &&
+                    item.Model.Name == modelName &&
+                    item.Model.Color == modelColor &&
+                    item.Price == price
+                );
+                return resultCar;
+            }
+
+
         }
     }
 }
