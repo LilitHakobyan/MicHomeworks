@@ -17,9 +17,9 @@ namespace Saloon_Car
         public string Name { get; set; }
         private string Password { get; set; }
         public UserEnum Role { get; set; }
-        private Dictionary<string, string> passwordAndLogin=new Dictionary<string, string>();
+        private Dictionary<string, string> passwordAndLogin = new Dictionary<string, string>();
         private string UserDataPath;
-        private List<User> users;
+        private List<User> users = new List<User>();
         public LogInPage()
         {
             InitializeComponent();
@@ -29,16 +29,25 @@ namespace Saloon_Car
         public void Initialize()
         {
             UserDataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\users.log";
+            if (!File.Exists(UserDataPath))
+            {
+                using (StreamWriter sw = File.CreateText(UserDataPath))
+                {
+                    sw.WriteLine('[');
+                    sw.WriteLine(']');
+                }
+            }
             users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(UserDataPath));
+
             foreach (User itemUser in users)
             {
-                passwordAndLogin.Add(itemUser.Name,itemUser.Password);
+                passwordAndLogin.Add(itemUser.Name, itemUser.Password);
             }
         }
         private void Login_Click(object sender, EventArgs e)
         {
             this.Name = this.textName.Text;
-           // this.Password = this.textPassword.Text;
+            // this.Password = this.textPassword.Text;
             string pass;
             if (passwordAndLogin.TryGetValue(this.textName.Text, out pass))
             {
@@ -49,7 +58,7 @@ namespace Saloon_Car
                     this.DialogResult = DialogResult.OK;
                 }
             }
-           
+
         }
 
         private void CreateAccount_Click(object sender, EventArgs e)
@@ -75,7 +84,7 @@ namespace Saloon_Car
                 File.WriteAllText(UserDataPath, serializeString);
                 this.DialogResult = DialogResult.OK;
             }
-            catch (ArgumentException )
+            catch (ArgumentException)
             {
                 MessageBox.Show(@"User name is exist");
             }
@@ -84,6 +93,12 @@ namespace Saloon_Car
                 MessageBox.Show(exception.Message);
             }
         }
-      
+
+        private void Cencel_Click(object sender, FormClosingEventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+
     }
 }

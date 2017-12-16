@@ -16,7 +16,7 @@ namespace Saloon_Car
     {
         private List<DataViewModel> dataViewModels;
         private int i;
-        string DataPath =string.Empty;
+        string DataPath = string.Empty;
         Saloon saloon = new Saloon("Avto.am");
         List<Brand> brendList = new List<Brand>();
         private string userName;
@@ -27,6 +27,7 @@ namespace Saloon_Car
             InitializeComponent();
             Vizible();
             Initializer();
+
         }
 
         public void GetUser()
@@ -38,10 +39,17 @@ namespace Saloon_Car
                 userName = formLogIn.Name;
                 Role = formLogIn.Role;
             }
+            //else
+            //{
+            //    InitializeComponent();
+            //    Vizible();
+            //    Initializer();
+            //    this.Close();
+            //}
         }
         public void Vizible()
         {
-            if (Role==UserEnum.User)
+            if (Role == UserEnum.User)
             {
                 this.button1.Visible = false;
                 this.button2.Visible = false;
@@ -59,6 +67,14 @@ namespace Saloon_Car
             {
                 DataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\salon.log";
                 dataGridView1.MultiSelect = false;
+                if (!File.Exists(DataPath))
+                {
+                    using (StreamWriter sw = File.AppendText(DataPath))
+                    {
+                        sw.WriteLine('[');
+                        sw.WriteLine(']');
+                    }
+                }
                 dataViewModels = JsonConvert.DeserializeObject<List<DataViewModel>>(File.ReadAllText(DataPath));
                 dataGridView1.DataSource = dataViewModels;
                 i = dataViewModels.Last().Id;
@@ -144,7 +160,7 @@ namespace Saloon_Car
                     }
                 }
             }
-           
+
             catch (Exception)
             {
                 MessageBox.Show(@"Please Choose a line");
@@ -211,7 +227,7 @@ namespace Saloon_Car
                         }
                     }
                 }
-                
+
             }
             catch (Exception)
             {
@@ -229,7 +245,7 @@ namespace Saloon_Car
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
             File.WriteAllText(DataPath, serializeString);
-            
+
         }
 
         private void Close_Click(object sender, EventArgs e)
