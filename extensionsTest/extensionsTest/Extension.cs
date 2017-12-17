@@ -13,5 +13,10 @@ namespace extensionsTest
             
             Console.WriteLine(s);
         }
+
+        public static bool IsSameType(this string type, string name)
+        {
+            return type.GetType() == name.GetType();
+        }
     }
 }
