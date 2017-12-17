@@ -299,5 +299,12 @@ namespace Saloon_Car
                 return resultCar;
             }
         }
+
+        private void SignOut_Click(object sender, EventArgs e)
+        {
+           
+            Application.Restart();
+            
+        }
     }
 }

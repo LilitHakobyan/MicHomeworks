@@ -147,7 +147,6 @@
             this.MinimumSize = new System.Drawing.Size(417, 392);
             this.Name = "LogInPage";
             this.Text = "LogInPage";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Cencel_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
