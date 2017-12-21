@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProducesConsumerThreads", "ProducesConsumerThreads\ProducesConsumerThreads.csproj", "{7608B735-F205-4D0C-B14F-9111E24DAFF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadTest", "ThreadTest\ThreadTest.csproj", "{B50B5890-FF62-486F-A180-723863E2AC29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +17,15 @@ Global
 		{7608B735-F205-4D0C-B14F-9111E24DAFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7608B735-F205-4D0C-B14F-9111E24DAFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7608B735-F205-4D0C-B14F-9111E24DAFF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50B5890-FF62-486F-A180-723863E2AC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50B5890-FF62-486F-A180-723863E2AC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50B5890-FF62-486F-A180-723863E2AC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50B5890-FF62-486F-A180-723863E2AC29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F71D2A0B-6400-4FAB-AAAF-EA75A5C72018}
 	EndGlobalSection
 EndGlobal
