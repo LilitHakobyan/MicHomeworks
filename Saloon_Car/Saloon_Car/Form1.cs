@@ -235,6 +235,9 @@ namespace Saloon_Car
             }
 
         }
+
+        //TODO change direction path for Misha
+        //TODO seperate method logic (Grid-Data)
         public void RerefreshGridAndData()
         {
             dataGridView1.DataSource = null;

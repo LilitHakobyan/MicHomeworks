@@ -92,6 +92,7 @@ namespace BackgroundWorkerTest
         private void btnPause_Click(object sender, EventArgs e)
         {
             bw.CancelAsync();
+            
         }
     }
 }
