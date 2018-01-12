@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -115,8 +116,7 @@ namespace Saloon_Car
                 brand = new Brand(brandName);
                 brendList.Add(brand);
             }
-
-            Model model = new Model()
+           Model model = new Model()
             {
                 Name = modelName,
                 Color = modelColor,

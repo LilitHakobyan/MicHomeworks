@@ -40,6 +40,7 @@ namespace InterfaceTestProject
         {
             Console.WriteLine("Base's Dispose");
         }
+        
     }
     // Этот класс наследует от Base и повторно реализует IDisposable
     internal class Derived : Base, IDisposable
