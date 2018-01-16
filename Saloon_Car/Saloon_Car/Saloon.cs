@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-    class Saloon
+    class Saloon:Entity
     {
         public string Name { get; set; }
         public List<Car> cars;

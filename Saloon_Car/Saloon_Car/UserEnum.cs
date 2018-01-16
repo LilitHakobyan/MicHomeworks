@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-   public enum UserEnum:int
+    public enum UserEnum : int
     {
-        Admin=1,
-        User
-    } 
+        User = 0,
+        Admin
+
+    }
 }

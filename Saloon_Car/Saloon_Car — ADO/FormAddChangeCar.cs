@@ -15,7 +15,7 @@ namespace Saloon_Car
         public string BrandName { get; set; }
         public string ModelName { get; set; }
         public string ModelColor { get; set; }
-        public decimal Price { get; private set; }
+        public double Price { get; private set; }
         public bool Search { get; private set; }
 
         public FormAddChangeCar(bool search = false)
@@ -28,7 +28,7 @@ namespace Saloon_Car
                 this.labelPrice.Visible = false;
             }
         }
-        public FormAddChangeCar(string brandName, string modelName, string modelColor, decimal price)
+        public FormAddChangeCar(string brandName, string modelName, string modelColor, double price)
         {
             InitializeComponent();
             this.txtBrand.Text = brandName;
@@ -51,7 +51,7 @@ namespace Saloon_Car
                 {
                     if (CheckPrice(this.txtPrice.Text))
                     {
-                        this.Price = decimal.Parse(this.txtPrice.Text);
+                        this.Price = double.Parse(this.txtPrice.Text);
                         this.DialogResult = DialogResult.OK;
                     }
                     else
@@ -80,7 +80,7 @@ namespace Saloon_Car
         {
             try
             {
-                this.Price = decimal.Parse(txtP);
+                this.Price = double.Parse(txtP);
                 if (double.Parse(txtP) < 0)
                     return false;
                 return true;

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-    class Saloon
-    {   public int SaloonID { get; set; }
+    class Saloon:EntityBase
+    {   
         public string Name { get; set; }
         public List<Car> cars;
 

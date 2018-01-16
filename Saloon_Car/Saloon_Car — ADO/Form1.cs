@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,7 +9,6 @@ using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Transactions;
 
 namespace Saloon_Car
 {
@@ -22,7 +20,7 @@ namespace Saloon_Car
         Saloon saloon = new Saloon("Avto.am");
         List<Brand> brendList = new List<Brand>();
         private string userName;
-        private bool Role;
+        private UserEnum Role;
         public Form1()
         {
             GetUser();
@@ -41,18 +39,17 @@ namespace Saloon_Car
                 userName = formLogIn.Name;
                 Role = formLogIn.Role;
             }
-            else
-            {
-                //InitializeComponent();
-                // Vizible();
-                //Initializer();
-                // this.Close();
-                Application.Exit();
-            }
+            //else
+            //{
+            //    InitializeComponent();
+            //    Vizible();
+            //    Initializer();
+            //    this.Close();
+            //}
         }
         public void Vizible()
         {
-            if (Role == false)
+            if (Role == UserEnum.User)
             {
                 this.button1.Visible = false;
                 this.button2.Visible = false;
@@ -66,68 +63,30 @@ namespace Saloon_Car
         }
         public void Initializer()
         {
-            dataViewModels = new List<DataViewModel>();
-            using (TransactionScope scope = new TransactionScope())
+            try
             {
-                using (SqlConnection connection = new SqlConnection(Utility.ConnectionString))
+                DataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\salon.log";
+                dataGridView1.MultiSelect = false;
+                if (!File.Exists(DataPath))
                 {
-                    connection.Open();
-
-                    string sqlCommand = @"SELECT Car.CarID, Car.Sold,Car.Deleted,Car.Price,Model.ModelID,Model.ModelName,Model.Color, Brand.BrandID,Brand.BrandName
-                FROM((Car
-                INNER JOIN Model ON Car.ModelID = Model.ModelID)
-                INNER JOIN Brand ON Model.BrandID = Brand.BrandID)";
-                    SqlCommand command = new SqlCommand(sqlCommand, connection);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (StreamWriter sw = File.AppendText(DataPath))
                     {
-                        while (reader.Read())
-                        {
-                            Brand brand = new Brand();
-                            foreach (Brand item in brendList)
-                            {
-                                if (item.Name == reader["BrandName"].ToString())
-                                    brand = item;
-                            }
-                            if (string.IsNullOrEmpty(brand.Name))
-                            {
-                                brand = new Brand
-                                {
-                                    Id = (int)reader["BrandID"],
-                                    Name = reader["BrandName"].ToString(),
-                                    models = new List<Model>()
-                                };
-                                brendList.Add(brand);
-                            }
-
-                            Model model = new Model()
-                            {
-                                Id = (int)reader["ModelID"],
-                                Name = reader["ModelName"].ToString(),
-                                Color = reader["Color"].ToString(),
-                                Brand = brand,
-                                BrandID = brand.Id
-
-                            };
-                            brand.models.Add(model);
-                            Car car = new Car(model, (decimal)reader["Price"])
-                            {
-                                Deleted = (bool)reader["Deleted"],
-                                Sold = (bool)reader["Sold"],
-                                Id = (int)reader["CarID"],
-                                ModelID = model.Id,
-                                SalonID = 5
-                            };
-
-                            saloon.cars.Add(car);
-                            dataViewModels.Add(new DataViewModel { Id = i++, Brand = brand.Name, Model = model.Name, Color = model.Color, Price = car.Price });
-                        }
+                        sw.WriteLine('[');
+                        sw.WriteLine(']');
                     }
                 }
-                scope.Complete();
+                dataViewModels = JsonConvert.DeserializeObject<List<DataViewModel>>(File.ReadAllText(DataPath));
+                dataGridView1.DataSource = dataViewModels;
+                i = dataViewModels.Last().Id;
+                foreach (DataViewModel viewModel in dataViewModels)
+                {
+                    CreateNewItem(viewModel.Brand, viewModel.Model, viewModel.Color, viewModel.Price);
+                }
             }
-            dataGridView1.DataSource = dataViewModels;
-            i = dataViewModels.Last().Id;
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void buttonADD_Click(object sender, EventArgs e)
         {
@@ -143,98 +102,31 @@ namespace Saloon_Car
 
         }
 
-        private void CreateNewItem(string brandName, string modelName, string modelColor, decimal price)
+        private void CreateNewItem(string brandName, string modelName, string modelColor, double price)
         {
-
-            using (TransactionScope scope = new TransactionScope())
+            Brand brand = new Brand();
+            foreach (Brand item in brendList)
             {
-                using (SqlConnection connection = new SqlConnection(Utility.ConnectionString))
-                {
-                    connection.Open();
-
-                    Brand brand = new Brand();
-                    foreach (Brand item in brendList)
-                    {
-                        if (item.Name == brandName)
-                            brand = item;
-                    }
-                    if (string.IsNullOrEmpty(brand.Name))
-                    {
-                        brand = new Brand(brandName);
-                        brendList.Add(brand);
-
-                        string insertStr = "Insert into Brand([BrandName])";
-                        insertStr += " Values(@Name)";
-                        SqlCommand command = new SqlCommand(insertStr, connection);
-                        command.Parameters.AddWithValue("Name", brandName);
-                        command.ExecuteNonQuery();
-
-                    }
-
-                    string str = $"Select BrandID from Brand Where BrandName='{brandName}'";
-
-                    SqlCommand findBrandId = new SqlCommand(str, connection);
-
-                    SqlDataReader reader = findBrandId.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        reader.Read();
-                        brand.Id = (int)reader["BrandID"];
-                    }
-                    reader.Close();
-
-
-                    Model model = new Model()
-                    {
-                        Name = modelName,
-                        Color = modelColor,
-                        Brand = brand,
-                        BrandID = brand.Id
-                    };
-                    brand.models.Add(model);
-
-                    string insertStrModel = "Insert into Model([ModelName],[Color],BrandID)";
-                    insertStrModel += " Values(@Name,@Color,@ID)";
-                    SqlCommand commandModel = new SqlCommand(insertStrModel, connection);
-                    commandModel.Parameters.AddWithValue("Name", modelName);
-                    commandModel.Parameters.AddWithValue("Color", modelColor);
-                    commandModel.Parameters.AddWithValue("ID", brand.Id);
-
-                    commandModel.ExecuteNonQuery();
-
-
-                    string strCar = $"Select ModelID from Model Where ModelName='{modelName}'";
-
-                    SqlCommand finModelId = new SqlCommand(strCar, connection);
-
-                    SqlDataReader readerM = finModelId.ExecuteReader();
-
-                    if (readerM.HasRows)
-                    {
-                        readerM.Read();
-                        model.Id = (int)readerM["ModelID"];
-                    }
-                    readerM.Close();
-
-                    Car car = new Car(model, price);
-                    car.ModelID = model.Id;
-                    saloon.cars.Add(car);
-
-
-                    string insertStrCar = "Insert into Car(Price,Sold,Deleted,ModelID)";
-                    insertStrCar += " Values(@Price,@Sold,@Deleted,@ModelID)";
-                    SqlCommand commandCar = new SqlCommand(insertStrCar, connection);
-                    commandCar.Parameters.AddWithValue("Price", price);
-                    commandCar.Parameters.AddWithValue("ModelID", model.Id);
-                    commandCar.Parameters.AddWithValue("Sold", false);
-                    commandCar.Parameters.AddWithValue("Deleted", false);
-
-                    commandCar.ExecuteNonQuery();
-                    //dataViewModels.Add(new DataViewModel { Id = i++, Brand = brand.Name, Model = model.Name, Color = model.Color, Price = car.Price });
-                }
-                scope.Complete();
+                if (item.Name == brandName)
+                    brand = item;
             }
+            if (string.IsNullOrEmpty(brand.Name))
+            {
+                brand = new Brand(brandName);
+                brendList.Add(brand);
+            }
+
+            Model model = new Model()
+            {
+                Name = modelName,
+                Color = modelColor,
+                Brand = brand
+            };
+            brand.models.Add(model);
+            Car car = new Car(model, price);
+            saloon.cars.Add(car);
+            //dataViewModels.Add(new DataViewModel { Id = i++, Brand = brand.Name, Model = model.Name, Color = model.Color, Price = car.Price });
+
         }
         private void Edit_Click(object sender, EventArgs e)
         {
@@ -349,13 +241,13 @@ namespace Saloon_Car
         {
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = dataViewModels;
-
-            //string serializeString = JsonConvert.SerializeObject(dataViewModels, Formatting.Indented,
-            //    new JsonSerializerSettings
-            //    {
-            //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            //    });
-            //File.WriteAllText(DataPath, serializeString);
+           
+            string serializeString = JsonConvert.SerializeObject(dataViewModels, Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            File.WriteAllText(DataPath, serializeString);
 
         }
 
@@ -388,9 +280,9 @@ namespace Saloon_Car
         }
 
         private Car FindCarItem(string brandName, string modelName, string modelColor,
-            decimal price = decimal.Zero)
+            double price = 0.0)
         {
-            if (price == decimal.Zero)
+            if (price == 0.0)
             {
                 Car resultCar = saloon.cars.FirstOrDefault(item =>
                     item.Model.Brand.Name.ToLower() == brandName.ToLower() &&
@@ -413,9 +305,9 @@ namespace Saloon_Car
 
         private void SignOut_Click(object sender, EventArgs e)
         {
-
+           
             Application.Restart();
-
+            
         }
     }
 }

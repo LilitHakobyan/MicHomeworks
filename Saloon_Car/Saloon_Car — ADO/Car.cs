@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-    class Car:Entity
-    {
+    class Car
+    {  
         public  Model Model { get; set;}
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public bool Sold { get; set; }
         public bool Deleted { get; set; }
-        public int SalonID { get; set; }
-        public int ModelID { get; set; }
 
-        public Car(Model model,decimal price)
+
+        public Car(Model model,double price)
         {
             this.Model = model;
             this.Price = price;

@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-    class User:Entity
+  public  class Entity
     {
-       public string Name { get; set; }
-       public string Password { get; set; }
-       public bool Role { get; set; }
-      
+        public int Id { get; set; }
     }
 }

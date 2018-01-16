@@ -6,21 +6,15 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-   public class Brand:Entity
+    class Saloon
     {
         public string Name { get; set; }
-        public List<Model> models;//=new List<Model>();
+        public List<Car> cars;
 
-        public Brand()
+        public Saloon(string name)
         {
-            
-        }
-        public Brand(string name)
-        {
+            cars=new List<Car>();
             this.Name = name;
-            models = new List<Model>();
         }
-
-        
     }
 }

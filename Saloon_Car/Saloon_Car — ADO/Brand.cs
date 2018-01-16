@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-   public class Brand:Entity
+   public class Brand
     {
         public string Name { get; set; }
         public List<Model> models;//=new List<Model>();

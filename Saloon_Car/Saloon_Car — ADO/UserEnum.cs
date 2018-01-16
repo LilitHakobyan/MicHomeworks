@@ -8,8 +8,7 @@ namespace Saloon_Car
 {
    public enum UserEnum:int
     {
-        User=0,
-        Admin
-       
+        Admin=1,
+        User
     } 
 }

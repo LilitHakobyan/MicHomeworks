@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-    class User:Entity
+  public  class EntityBase
     {
-       public string Name { get; set; }
-       public string Password { get; set; }
-       public bool Role { get; set; }
-      
+        [Browsable(false)]
+        public int Id { get; set; } = -1;
     }
 }

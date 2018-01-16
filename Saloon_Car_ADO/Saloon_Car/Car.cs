@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace Saloon_Car
 {
-    class Car
-    {   public  int CarID { get; set; }
-        public  Model Model { get; set;}
-        public double Price { get; set; }
+    class Car:EntityBase
+    {   public  Model Model { get; set;}
+        public decimal Price { get; set; }
         public bool Sold { get; set; }
         public bool Deleted { get; set; }
+        public int SalonID { get; set; }
+        public int ModelID { get; set; }
 
-
-        public Car(Model model,double price)
+        public Car(Model model,decimal price)
         {
             this.Model = model;
             this.Price = price;
-            this.Sold = false;
-            this.Deleted = false;
+           
         }
     }
 }

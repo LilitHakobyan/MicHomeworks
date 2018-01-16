@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Saloon_Car
     {
         public string Name { get; set; }
         private string Password { get; set; }
-        public UserEnum Role { get; set; }
+        public bool Role { get; set; }
         private Dictionary<string, string> passwordAndLogin = new Dictionary<string, string>();
         private string UserDataPath;
         private List<User> users = new List<User>();
@@ -28,21 +29,32 @@ namespace Saloon_Car
 
         public void Initialize()
         {
-            UserDataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\users.log";
-            if (!File.Exists(UserDataPath))
+            using (SqlConnection connection = new SqlConnection(Connection.ConnectionString))
             {
-                using (StreamWriter sw = File.CreateText(UserDataPath))
+                connection.Open();
+
+                string sqlCommand = "Select * from UserT";
+                SqlCommand command = new SqlCommand(sqlCommand, connection);
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    sw.WriteLine('[');
-                    sw.WriteLine(']');
+                    while (reader.Read())
+                    {
+                        User useritem = new User()
+                        {
+                            Id = (int)reader["UserID"],
+                            Name = reader["UserName"].ToString(),
+                            Password = reader["UserPassword"].ToString(),
+                            Role = (bool)reader["UserRole"]
+
+                        };
+                        users.Add(useritem);
+
+                        passwordAndLogin.Add(useritem.Name, useritem.Password);
+                    }
                 }
             }
-            users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(UserDataPath));
 
-            foreach (User itemUser in users)
-            {
-                passwordAndLogin.Add(itemUser.Name, itemUser.Password);
-            }
         }
         private void Login_Click(object sender, EventArgs e)
         {
@@ -65,33 +77,33 @@ namespace Saloon_Car
         {
             this.Name = this.textName.Text;
             this.Password = this.textPassword.Text;
-            Role = UserEnum.User;
-            try
-            {
-                passwordAndLogin.Add(Name, Password);
-                User user = new User()
+            Role =  false;
+            using (SqlConnection connection = new SqlConnection(Connection.ConnectionString))
                 {
-                    Name = this.textName.Text,
-                    Password = this.textPassword.Text,
-                    Role = UserEnum.User
-                };
-                users.Add(user);
-                string serializeString = JsonConvert.SerializeObject(users, Formatting.Indented,
-                    new JsonSerializerSettings
+                    
+                    User user = new User()
                     {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-                File.WriteAllText(UserDataPath, serializeString);
+                        Name = this.textName.Text,
+                        Password = this.textPassword.Text,
+                        Role = false
+                    };
+                    users.Add(user);
+
+                    string sqlCommand = "Insert into UserT(UserName,UserPassword,UserRole) Values(@uName,@uPasword,@uRole)";
+
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+                    connection.Open();
+
+                    command.Parameters.AddWithValue("uName", this.textName.Text);
+                    command.Parameters.AddWithValue("uPasword", this.textPassword.Text);
+                   command.Parameters.AddWithValue("uRole", 0);
+                   command.ExecuteNonQuery();
+
+                  passwordAndLogin.Add(Name, Password);
+            }
                 this.DialogResult = DialogResult.OK;
-            }
-            catch (ArgumentException)
-            {
-                MessageBox.Show(@"User name is exist");
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            
+           
         }
 
         private void Cencel_Click(object sender, FormClosingEventArgs e)

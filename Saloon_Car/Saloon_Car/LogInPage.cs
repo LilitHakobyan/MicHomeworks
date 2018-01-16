@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -16,7 +18,7 @@ namespace Saloon_Car
     {
         public string Name { get; set; }
         private string Password { get; set; }
-        public UserEnum Role { get; set; }
+        public bool Role { get; set; }
         private Dictionary<string, string> passwordAndLogin = new Dictionary<string, string>();
         private string UserDataPath;
         private List<User> users = new List<User>();
@@ -28,20 +30,30 @@ namespace Saloon_Car
 
         public void Initialize()
         {
-            UserDataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\users.log";
-            if (!File.Exists(UserDataPath))
-            {
-                using (StreamWriter sw = File.CreateText(UserDataPath))
+            using (SqlConnection connection = new SqlConnection(Utility.ConnectionString))
                 {
-                    sw.WriteLine('[');
-                    sw.WriteLine(']');
-                }
-            }
-            users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(UserDataPath));
+                    connection.Open();
 
-            foreach (User itemUser in users)
-            {
-                passwordAndLogin.Add(itemUser.Name, itemUser.Password);
+                    string sqlCommand = "Select * from UserT";
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            User useritem = new User()
+                            {
+                                Id = (int) reader["UserID"],
+                                Name = reader["UserName"].ToString(),
+                                Password = reader["UserPassword"].ToString(),
+                                Role = (bool) reader["UserRole"]
+
+                            };
+                            users.Add(useritem);
+
+                            passwordAndLogin.Add(useritem.Name, useritem.Password);
+                        }
+                    }
             }
         }
         private void Login_Click(object sender, EventArgs e)
@@ -58,6 +70,10 @@ namespace Saloon_Car
                     this.DialogResult = DialogResult.OK;
                 }
             }
+            else
+            {
+                MessageBox.Show("Invalid password or login");
+            }
 
         }
 
@@ -65,33 +81,49 @@ namespace Saloon_Car
         {
             this.Name = this.textName.Text;
             this.Password = this.textPassword.Text;
-            Role = UserEnum.User;
+            Role = false;
             try
             {
-                passwordAndLogin.Add(Name, Password);
-                User user = new User()
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    Name = this.textName.Text,
-                    Password = this.textPassword.Text,
-                    Role = UserEnum.User
-                };
-                users.Add(user);
-                string serializeString = JsonConvert.SerializeObject(users, Formatting.Indented,
-                    new JsonSerializerSettings
+                    using (SqlConnection connection = new SqlConnection(Utility.ConnectionString))
                     {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    });
-                File.WriteAllText(UserDataPath, serializeString);
-                this.DialogResult = DialogResult.OK;
+
+                        User user = new User()
+                        {
+                            Name = this.textName.Text,
+                            Password = this.textPassword.Text,
+                            Role = false
+                        };
+                        users.Add(user);
+
+                        string sqlCommand =
+                            "Insert into UserT(UserName,UserPassword,UserRole) Values(@uName,@uPasword,@uRole)";
+
+                        SqlCommand command = new SqlCommand(sqlCommand, connection);
+                        connection.Open();
+
+                        command.Parameters.AddWithValue("uName", this.textName.Text);
+                        command.Parameters.AddWithValue("uPasword", this.textPassword.Text);
+                        command.Parameters.AddWithValue("uRole", 0);
+                        command.ExecuteNonQuery();
+
+                        passwordAndLogin.Add(Name, Password);
+                        this.DialogResult = DialogResult.OK;
+                        scope.Complete();
+                    }
+
+                }
             }
             catch (ArgumentException)
             {
-                MessageBox.Show(@"User name is exist");
+                MessageBox.Show("User Name is exist");
             }
-            catch (Exception exception)
+        catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+           
         }
 
         private void Cencel_Click(object sender, FormClosingEventArgs e)
