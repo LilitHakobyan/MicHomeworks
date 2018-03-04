@@ -11,12 +11,26 @@ namespace Collections
     {
         static void Main(string[] args)
         {
-            UserCollection users=new UserCollection();
-            //foreach (var user in users)
-            //{
-            //    Console.WriteLine(user.ToString());
-            //}
+            UserCallectionWithYieldReturn yieldUsers=new UserCallectionWithYieldReturn();
+            foreach (var yieldUser in yieldUsers)
+            {
+                Console.WriteLine(yieldUser.ToString());
+            }
+            Console.WriteLine("------------------------------------------------");
+            UserCollectionWithInnerClassIEnum mycallection=new UserCollectionWithInnerClassIEnum();
+            foreach (var call in mycallection)
+            {
+                Console.WriteLine(call.ToString());
+            }
+            Console.WriteLine("------------------------------------");
+            UserCollectionNew userNew=new UserCollectionNew();
 
+            foreach (var user in userNew)
+            {
+                Console.WriteLine(user.ToString());
+            }
+            Console.WriteLine("-------------------------------");
+            UserCollection users = new UserCollection();
             IEnumerable enumerable=users as IEnumerable;
 
             IEnumerator enumerator = users.GetEnumerator();

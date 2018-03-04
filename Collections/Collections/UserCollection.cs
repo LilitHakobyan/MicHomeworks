@@ -28,7 +28,7 @@ namespace Collections
             get { return userElements[position]; }
         }
 
-        public IEnumerator GetEnumerator() => this as IEnumerator;
+       public IEnumerator GetEnumerator() => this as IEnumerator;
 
         public bool MoveNext()
         {
