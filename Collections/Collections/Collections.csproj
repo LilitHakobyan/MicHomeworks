@@ -49,6 +49,7 @@
     <Compile Include="UserCollection.cs" />
     <Compile Include="UserCollectionNew.cs" />
     <Compile Include="UserCollectionWithInnerClassIEnum.cs" />
+    <Compile Include="UserCollectionWithoutIEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

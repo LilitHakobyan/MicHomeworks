@@ -11,6 +11,12 @@ namespace Collections
     {
         static void Main(string[] args)
         {
+            UserCollectionWithoutIEnum withoutIEnum = new UserCollectionWithoutIEnum();//>??
+            foreach (var k in withoutIEnum)
+            {
+                Console.WriteLine(k.ToString());
+            }
+            Console.WriteLine( "-y----------------------------------------------------");
             UserCallectionWithYieldReturn yieldUsers=new UserCallectionWithYieldReturn();
             foreach (var yieldUser in yieldUsers)
             {
