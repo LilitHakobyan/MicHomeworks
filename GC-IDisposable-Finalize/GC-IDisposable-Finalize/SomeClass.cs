@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace GC_IDisposable_Finalize
 {
-    public class SomeClass : IDisposable
+
+    // Design pattern for a base class.
+    public class Base : IDisposable
     {
         private bool disposed = false;
 
-        // реализация интерфейса IDisposable.
+        //Implement IDisposable.
         public void Dispose()
         {
             Dispose(true);
-            // подавляем финализацию
             GC.SuppressFinalize(this);
         }
 
@@ -24,17 +25,45 @@ namespace GC_IDisposable_Finalize
             {
                 if (disposing)
                 {
-                    // Освобождаем управляемые ресурсы
+                    // Free other state (managed objects).
                 }
-                // освобождаем неуправляемые объекты
+                // Free your own state (unmanaged objects).
+                // Set large fields to null.
                 disposed = true;
             }
         }
 
-        // Деструктор
-        ~SomeClass()
+        // Use C# destructor syntax for finalization code.
+        ~Base()
         {
+            // Simply call Dispose(false).
             Dispose(false);
         }
+    }
+
+    // Design pattern for a derived class.
+    public class Derived : Base
+    {
+        private bool disposed = false;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    // Release managed resources.
+                }
+                // Release unmanaged resources.
+                // Set large fields to null.
+                // Call Dispose on your base class.
+                disposed = true;
+            }
+            base.Dispose(disposing);
+        }
+
+        // The derived class does not have a Finalize method
+        // or a Dispose method without parameters because it inherits
+        // them from the base class.
     }
 }
