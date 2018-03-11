@@ -20,9 +20,9 @@ namespace AdoNetADDReadeImageFromDB
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandText = @"INSERT INTO ImageInfo VALUES (@FileName, @Title, @ImageData)";
-                command.Parameters.Add("@FileName", SqlDbType.NVarChar, 50);
-                command.Parameters.Add("@Title", SqlDbType.NVarChar, 50);
-                command.Parameters.Add("@ImageData", SqlDbType.Image, 1000000);
+                //command.Parameters.Add("@FileName", SqlDbType.NVarChar, 50);
+                //command.Parameters.Add("@Title", SqlDbType.NVarChar, 50);
+                //command.Parameters.Add("@ImageData", SqlDbType.Image, 1000000);
 
                 // получаем короткое имя файла для сохранения в бд
                 string shortFileName = filename.Substring(filename.LastIndexOf('\\') + 1); // cats.jpg
@@ -34,11 +34,15 @@ namespace AdoNetADDReadeImageFromDB
                     fs.Read(imageData, 0, imageData.Length);
                 }
                 // передаем данные в команду через параметры
-                command.Parameters["@FileName"].Value = shortFileName;
-                command.Parameters["@Title"].Value = title;
-                command.Parameters["@ImageData"].Value = imageData;
+                //command.Parameters["@FileName"].Value = shortFileName;
+                //command.Parameters["@Title"].Value = title;
+                //command.Parameters["@ImageData"].Value = imageData;
+                command.Parameters.AddWithValue("FileName", shortFileName);
+                command.Parameters.AddWithValue("Title", title);
+                command.Parameters.AddWithValue("ImageData", imageData);
 
-                command.ExecuteNonQuery();
+               int count= command.ExecuteNonQuery();
+               Console.WriteLine(count);
             }
         }
         public void ReadFileFromDatabase()
@@ -48,7 +52,7 @@ namespace AdoNetADDReadeImageFromDB
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sql = "SELECT * FROM ImagesDB";
+                string sql = "SELECT * FROM ImageInfo";
                 SqlCommand command = new SqlCommand(sql, connection);
                 SqlDataReader reader = command.ExecuteReader();
 
